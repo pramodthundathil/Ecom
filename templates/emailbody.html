@@ -1,0 +1,16 @@
+
+ 
+ {% autoescape off %}
+Hi {{ user.username }},
+
+Your E-Cart Account Was created.
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+
+ do not share your password to anyone 
+
+ Happy shopping...
+ E-cart
+ 
+ {% endautoescape %}

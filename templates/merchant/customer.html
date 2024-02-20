@@ -1,0 +1,72 @@
+{% extends "merchantindex.html" %}
+{% block content %}
+
+<style>
+    .itemcontainer {
+        width: 80%;
+        height: auto;
+        margin: auto;
+        border: .6px solid black;
+        padding: 30px;
+        background-color: white;
+    }
+    .info{
+        color:red
+    }
+    .success{
+        color: green;
+    }
+</style>
+
+<div class="contanier mt-5 mb-5">
+    <div class="itemcontainer">
+        {% for message in messages %}
+       <h6 style="color:rgb(0, 255, 102);text-align:center">{{message}}</h6> 
+        {% endfor %}
+        <h2>Delivery Address</h2>
+
+        <table class="table table-striped mt-5">
+            <tr>
+                <th>Name</th>
+                <td>{{items.firstname}} {{items.lastname}}</td>
+            </tr>
+           
+            <tr>
+                <th>Phone:</th>
+                <td><input type="number" class="form-control border-0" readonly value="{{items.mob}}" name="phone" ></td>
+            </tr>
+            <tr>
+                <th>House:</th>
+                <td><input type="text" class="form-control border-0" readonly value="{{items.address1}}" name="house" ></td>
+                
+            </tr>
+            <tr>
+                <th>Area:</th>
+                <td><input type="text" class="form-control border-0" readonly value="{{items.address2}}" name="house" ></td>
+                
+            </tr>
+            <tr>
+                <th>City</th>
+                <td><input type="text" class="form-control border-0" readonly value="{{items.city}}" name="city"></td>
+
+            </tr>
+            <tr>
+                <th>District</th>
+                <td><input type="text" class="form-control border-0" readonly value="{{items.pin}}" name="district" ></td>
+
+            </tr>
+            <tr>
+                <th>State</th>
+                <td><input type="text" class="form-control border-0" readonly value="{{items.state}}" name="state" ></td>
+
+            </tr>
+<tr>
+    <th></th>
+    <!-- <th><button type="submit" class="btn btn-info">Update</button></th> -->
+</tr>
+        </form>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

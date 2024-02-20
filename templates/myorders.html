@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <h4>My Orders</h4>
+        <table class="table mt-4">
+            <tr>
+                <th>Product</th>
+                <th>Rate</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Delete</th>
+            </tr>
+            {% for i in orderitems %}
+              
+            <tr>
+                <td>{{i.product.product_name}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.stock}}</td>
+                <td>{{i.date}}</td>
+                <th>{{i.status}}</th>
+                <td><a href="{%url 'deleteordercus' i.id %}" class="btn btn-outline-danger">delete</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock %}

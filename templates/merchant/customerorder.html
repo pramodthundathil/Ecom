@@ -1,0 +1,37 @@
+{% extends "merchantindex.html" %}
+{% block content %}
+
+
+<div class="container mt-5">
+        <h4>My Orders</h4>
+        <table class="table mt-4">
+            <tr>
+                <th>Product</th>
+                <th>Rate</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Status</th>
+
+                <th>View Customer</th>
+                <th>Delete</th>
+            </tr>
+            {% for i in check %}
+              
+            <tr>
+                <td>{{i.product.product_name}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.stock}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.status}}</td>
+                <td><a href="{%url 'ViewCustomerAddress' i.id %}" class="btn btn-dark">View Customer</a></td>
+                <td>
+                    <a href="{%url 'ChangeOrderStatus' i.id 'Order Taken' %}" class="btn btn-dark btn-sm">Order Taken</a>
+                    <a href="{%url 'ChangeOrderStatus' i.id 'Order Despach' %}" class="btn btn-info btn-sm">Order Despach</a>
+                    <a href="{%url 'ChangeOrderStatus' i.id 'Order Delivered' %}" class="btn btn-warning btn-sm">Order Delivered</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}
