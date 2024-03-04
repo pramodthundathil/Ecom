@@ -30,7 +30,7 @@
             <td>{{i.product_price}}</td>
             <td>{{i.Product_category}} - {{i.Product_subcategory}}</td>
             <td>{{i.product_stock}}</td>
-            <td><a href="" class="btn btn-outline-info">view</a></td>
+            <td><a href="{%url 'ProducteditMercahant' i.id %}" class="btn btn-outline-info">view</a></td>
         </tr>
         {% endfor %}
     </table>

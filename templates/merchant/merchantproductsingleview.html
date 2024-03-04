@@ -1,0 +1,64 @@
+{% extends "merchantindex.html" %}
+{% block content %}
+
+<div class="container-fluid pb-5">
+    {% for message in messages %}
+    <h6 style="color:rgb(0, 255, 47);text-align:center">{{message}}</h6> 
+    {% endfor %}
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="{{product.Product_Image.url}}" alt="Image">
+                    </div>
+                    
+                    
+                </div>
+                <br>
+                <form action="{%url 'ChangeImage' product.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    Change image: <br>
+                    <input type="file" class="form-control" name="image" required><button class="btn btn-sm btn-info">Change Image</button>
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="col-lg-7 h-auto mb-30">
+            <form  method="post">
+                {% csrf_token %}
+            <div class="h-100 bg-light p-30">
+                <h3>{{product.product_name}}</h3>
+                <p>
+                    Product Name:
+                    <input type="text" required value="{{product.product_name}}" name="name" class="form-control"></p>
+                    
+                </p>
+                
+                <p class="font-weight-semi-bold mb-4">Amount Rs.
+                    
+                    <input type="number" required value="{{product.product_price}}" name="price" class="form-control"></p>
+                <p class="mb-4">Description:
+                    <input type="text" required value="{{product.product_description}}" name="dis" class="form-control"></p>
+
+                    </p>
+                <p>Stock 
+                    <input type="number" required value="{{product.product_stock}}" name="stock" class="form-control"></p>
+                    
+                </p>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    
+                    
+                </div>
+                <div class="d-flex pt-2">
+                    <button type="submit" class="btn btn-info">Update</button>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

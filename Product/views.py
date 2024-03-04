@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import ProductAddForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import ProductDetails,CartItems, CheckoutItems, CheckoutAddress
+from .models import ProductDetails,CartItems, CheckoutItems, CheckoutAddress, Review
 
 import razorpay
 from django.conf import settings
@@ -40,6 +40,7 @@ def MerchantProduct(request):
 
 def ProductsingleView(request,pk):
     product = ProductDetails.objects.get(id = pk)
+    review = Review.objects.filter(product = product)
     cat = product.Product_category
     subcat = product.Product_subcategory
 
@@ -47,7 +48,9 @@ def ProductsingleView(request,pk):
 
     context = {
         "product":product,
-        "suggested":suggested
+        "suggested":suggested,
+        "review":review,
+        "lenreview":len(review)
     }
     return render(request,"productsingleview.html",context)
 
@@ -308,6 +311,49 @@ def Search(request):
         "product":product
         }
         return render(request,"shop.html",context)
+    
+@login_required(login_url='SignIn')
+def Addreviews(request,pk):
+    prod = ProductDetails.objects.get(id = pk)
+    if request.method == "POST":
+        review = request.POST["review"]
+        name = request.POST["name"]
+
+        review = Review.objects.create(name = name, review = review, user = request.user, product = prod)
+        review.save()
+        return redirect("ProductsingleView",pk= pk)
+
+
+def ProducteditMercahant(request,pk):
+    product = ProductDetails.objects.get(id = pk)
+    if request.method == "POST":
+        name = request.POST['name']
+        price = request.POST['price']
+        dis = request.POST['dis']
+        stock = request.POST['stock']
+
+        product.product_name = name 
+        product.product_price = price
+        product.product_description = dis
+        product.product_stock = stock
+        product.save()
+        messages.info(request,"Product Updated..")
+        return redirect("ProducteditMercahant",pk= pk)
+    
+    context = {
+        "product":product
+    }
+    return render(request,"merchant/merchantproductsingleview.html",context)
+
+def ChangeImage(request,pk):
+    product = ProductDetails.objects.get(id = pk)
+    if request.method == "POST":
+        image = request.FILES['image']
+        product.Product_Image.delete()
+        product.Product_Image = image
+        product.save()
+        messages.info(request,"Product Updated..")
+        return redirect("ProducteditMercahant",pk= pk)
 
     
 

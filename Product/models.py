@@ -51,6 +51,14 @@ class CheckoutItems(models.Model):
     payment_status = models.BooleanField(default=False)
     def __str__(self):
         return self.product
+
+
+class Review(models.Model):
+    product = models.ForeignKey(ProductDetails,on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    review = models.CharField(max_length = 1000)
+    name = models.CharField(max_length = 20)
+    date = models.DateTimeField(auto_now_add = True,null=True)
     
 
 

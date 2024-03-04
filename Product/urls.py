@@ -23,6 +23,10 @@ urlpatterns = [
     path("Sorting/<str:str>",views.Sorting,name="Sorting"),
     path("Sorting1/<str:str>",views.Sorting1,name="Sorting1"),
     path("Search",views.Search,name="Search"),
+    path("Addreviews/<int:pk>",views.Addreviews,name="Addreviews"),
+    path("ProducteditMercahant/<int:pk>",views.ProducteditMercahant,name="ProducteditMercahant"),
+    path("ChangeImage/<int:pk>",views.ChangeImage,name="ChangeImage"),
+
 
 
     
